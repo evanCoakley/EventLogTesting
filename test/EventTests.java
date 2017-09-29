@@ -1,7 +1,5 @@
 import com.example.EventLog;
 import com.example.Event;
-import com.sun.deploy.cache.InMemoryLocalApplicationProperties;
-import com.sun.tools.doclets.formats.html.SourceToHTMLConverter;
 import org.junit.Test;
 import org.junit.Rule;
 import org.junit.After;
@@ -51,7 +49,25 @@ public class EventTests {
         assertTrue(event.addEvent(improperAction));
     }
     @Test
-    public void
-
+    public void invalidActionTest() throws IllegalArgumentException{
+        System.out.println("Testing if invalid action can be added");
+        Event eventTest = new Event();
+        eventTest.setName("Face To Face");
+        eventTest.setAction("invalid action");
+        thrown.expect(IllegalArgumentException.class);
+        assertFalse(event.addEvent(eventTest));
+    }
+    @Test
+    public void addEvent() throws IllegalArgumentException{
+        System.out.println("Testing add event function");
+        Event event1 = new Event("event1", "Face2Face");
+        Event event2 = new Event("event2", "PhoneCall");
+        Event event3 = new Event( "event3", "TextMessaging");
+        Event event4 = new Event ("event4", "Unknown");
+        assertTrue(event.addEvent(event1));
+        assertTrue(event.addEvent(event2));
+        assertTrue(event.addEvent(event3));
+        assertTrue(event.addEvent(event4));
+    }
 }
 
